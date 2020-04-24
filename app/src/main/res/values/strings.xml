@@ -17,4 +17,6 @@
     <string name="placeholder">TextView</string>
     <string name="share">Share</string>
     <string name="delete">Delete</string>
+    <string name="welcome">Hello, Welcome to\nHeartry...</string>
+    <string name="know">Let\'s start by know\nabout you</string>
 </resources>

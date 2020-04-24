@@ -12,17 +12,21 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.darshan.writepoems.model.PoemModel;
+import com.darshan.writepoems.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AddPoem extends AppCompatActivity {
 
-    EditText title, poem;
-    String userID, key = null;
+    private EditText title, poem;
+    private String userID, key = null, name;
     boolean update;
 
     FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -38,6 +42,7 @@ public class AddPoem extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.share:
+                share();
                 break;
             case R.id.delete:
                 delete();
@@ -60,6 +65,7 @@ public class AddPoem extends AppCompatActivity {
 
         Intent intent = getIntent();
         userID = intent.getStringExtra("UserID");
+        name = intent.getStringExtra("name");
 
         update = intent.getExtras().getBoolean("UPDATE");
         if (update) {
@@ -80,6 +86,8 @@ public class AddPoem extends AppCompatActivity {
                 writeToDB(view);
             }
         });
+
+        setNameParm();
     }
 
     private void writeToDB(final View view) {
@@ -121,4 +129,43 @@ public class AddPoem extends AppCompatActivity {
             finish();
         }
     }
+
+    private void share() {
+        if (this.key == null)
+            this.key = ref.child(userID).child("poems").push().getKey();
+
+        String title = this.title.getText().toString();
+        String poem = this.poem.getText().toString();
+        PoemModel model = new PoemModel(title, poem);
+
+        ref.child(userID).child("poems").child(key).setValue(model);
+
+        String message = String.format("*%s*\n%s\n\n~%s", title, poem, name);
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+        sendIntent.setType("text/plain");
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+
+        startActivity(shareIntent);
+    }
+
+    private void setNameParm() {
+        DatabaseReference nameRef = db.getReference("users").child(userID);
+        nameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                name = user.getName();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 }
