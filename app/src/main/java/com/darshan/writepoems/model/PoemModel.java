@@ -12,6 +12,14 @@ public class PoemModel {
         this.poem = poem;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPoem(String poem) {
+        this.poem = poem;
+    }
+
     public String getTitle() {
         return title;
     }
