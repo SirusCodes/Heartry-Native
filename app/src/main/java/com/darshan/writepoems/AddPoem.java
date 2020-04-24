@@ -2,6 +2,8 @@ package com.darshan.writepoems;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -27,12 +29,30 @@ public class AddPoem extends AppCompatActivity {
     DatabaseReference ref = db.getReference("users");
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.app_bar_buttons, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.share:
+                break;
+            case R.id.delete:
+                delete();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_poem);
         ActionBar actionBar = getSupportActionBar();
 
-        String appBarTitle;
 
         title = findViewById(R.id.title);
         poem = findViewById(R.id.main_poem);
@@ -89,5 +109,16 @@ public class AddPoem extends AppCompatActivity {
 
     }
 
-
+    private void delete() {
+        if (key != null)
+            ref.child(userID).child("poems").child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    finish();
+                }
+            });
+        else {
+            finish();
+        }
+    }
 }
