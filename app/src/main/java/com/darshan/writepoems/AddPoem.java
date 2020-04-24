@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.darshan.writepoems.model.PoemModel;
@@ -19,7 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AddPoem extends AppCompatActivity {
 
     EditText title, poem;
-    String userID, key;
+    String userID, key = null;
+    boolean update;
 
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference ref = db.getReference("users");
@@ -28,15 +30,27 @@ public class AddPoem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_poem);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
+        ActionBar actionBar = getSupportActionBar();
+
+        String appBarTitle;
 
         title = findViewById(R.id.title);
         poem = findViewById(R.id.main_poem);
 
+
         Intent intent = getIntent();
         userID = intent.getStringExtra("UserID");
+
+        update = intent.getExtras().getBoolean("UPDATE");
+        if (update) {
+            actionBar.setTitle("Edit Poem");
+            key = intent.getStringExtra("PoemKEY");
+            String title = intent.getStringExtra("title");
+            this.title.setText(title);
+            String poem = intent.getStringExtra("poem");
+            this.poem.setText(poem);
+        } else
+            actionBar.setTitle("Add Poem");
 
         FloatingActionButton fab = findViewById(R.id.save_poem);
 
@@ -49,8 +63,8 @@ public class AddPoem extends AppCompatActivity {
     }
 
     private void writeToDB(final View view) {
-        if (key == null)
-            key = ref.child(userID).child("poems").push().getKey();
+        if (this.key == null)
+            this.key = ref.child(userID).child("poems").push().getKey();
 
         String title = this.title.getText().toString();
         String poem = this.poem.getText().toString();

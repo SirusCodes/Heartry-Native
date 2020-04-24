@@ -24,8 +24,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -35,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
 
     FirebaseDatabase db = FirebaseDatabase.getInstance();
-    DatabaseReference ref = db.getReference("users");
+    DatabaseReference ref;
     private TextInputEditText nameField;
 
 
@@ -52,7 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-
+        db.setPersistenceEnabled(true);
+        ref = db.getReference("users");
         nameField = findViewById(R.id.textField);
 
         SignInButton button = findViewById(R.id.login_button);
@@ -141,8 +145,21 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
-        ref.child(userId).setValue(user);
+
+    private void writeNewUser(final String userId, final String name, final String email) {
+        ref.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    User user = new User(name, email);
+                    ref.child(userId).setValue(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

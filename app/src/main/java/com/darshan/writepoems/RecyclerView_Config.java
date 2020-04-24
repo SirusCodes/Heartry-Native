@@ -2,6 +2,7 @@ package com.darshan.writepoems;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -17,25 +18,45 @@ public class RecyclerView_Config {
     private Context mContext;
     private PoemAdapter poemAdapter;
 
-    public void setConfig(RecyclerView recyclerView, Context context, List<PoemModel> poemList, List<String> keyList) {
+    public void setConfig(RecyclerView recyclerView, Context context, List<PoemModel> poemList, List<String> keyList, OnPoemListener onPoemListener) {
         this.mContext = context;
-        poemAdapter = new PoemAdapter(poemList, keyList);
+        poemAdapter = new PoemAdapter(poemList, keyList, onPoemListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(poemAdapter);
     }
 
-    class PoemItemView extends RecyclerView.ViewHolder {
+    public interface OnPoemListener {
+        void onPoemClick(int position);
+    }
+
+    class PoemItemView extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title;
         private TextView poem;
 
+        OnPoemListener onPoemListener;
+
         private String key;
 
-        public PoemItemView(ViewGroup parent) {
+        public PoemItemView(ViewGroup parent, OnPoemListener onPoemListener) {
             super(LayoutInflater.from(mContext).
                     inflate(R.layout.poem_layout, parent, false));
 
+            this.onPoemListener = onPoemListener;
             title = itemView.findViewById(R.id.poem_title);
             poem = itemView.findViewById(R.id.main_poem);
+            itemView.setOnClickListener(this);
+
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(mContext, AddPoem.class);
+//                    intent.putExtra("title", title.getText().toString());
+//                    intent.putExtra("PoemKEY",key);
+//                    intent.putExtra("poem",poem.getText().toString());
+//                    intent.putExtra("UPDATE",true);
+//                    mContext.startActivity(intent);
+//                }
+//            });
         }
 
         public void bind(PoemModel poemModel, String key) {
@@ -48,21 +69,28 @@ public class RecyclerView_Config {
             poem.setText(mainPoem);
             this.key = key;
         }
+
+        @Override
+        public void onClick(View v) {
+            onPoemListener.onPoemClick(getAdapterPosition());
+        }
     }
 
     class PoemAdapter extends RecyclerView.Adapter<PoemItemView> {
         private List<PoemModel> poemList;
         private List<String> keyList;
+        private OnPoemListener mOnPoemListener;
 
-        public PoemAdapter(List<PoemModel> poemList, List<String> keyList) {
+        public PoemAdapter(List<PoemModel> poemList, List<String> keyList, OnPoemListener onPoemListener) {
             this.poemList = poemList;
             this.keyList = keyList;
+            this.mOnPoemListener = onPoemListener;
         }
 
         @NonNull
         @Override
         public PoemItemView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new PoemItemView(parent);
+            return new PoemItemView(parent, mOnPoemListener);
         }
 
         @Override

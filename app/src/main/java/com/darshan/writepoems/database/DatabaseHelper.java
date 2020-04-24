@@ -19,7 +19,6 @@ public class DatabaseHelper {
     private List<PoemModel> poemList = new ArrayList<>();
 
     public DatabaseHelper(String userID) {
-//        db.setPersistenceEnabled(true);
         db = FirebaseDatabase.getInstance();
         ref = db.getReference("users").child(userID).child("poems");
     }
