@@ -20,11 +20,16 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
+        Intent intent = getIntent();
+        final String userID = intent.getStringExtra("UserID");
+
+
         FloatingActionButton fab = findViewById(R.id.add_poem);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(MainActivity.this, AddPoem.class);
+                myIntent.putExtra("UserID", userID);
                 startActivity(myIntent);
             }
         });
