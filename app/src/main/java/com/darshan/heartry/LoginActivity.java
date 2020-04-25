@@ -1,4 +1,4 @@
-package com.darshan.writepoems;
+package com.darshan.heartry;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.darshan.writepoems.model.User;
+import com.darshan.heartry.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -33,12 +33,11 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
 
     private final static int RC_SIGN_IN = 2;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference ref;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth.AuthStateListener authStateListener;
-
-    FirebaseDatabase db = FirebaseDatabase.getInstance();
-    DatabaseReference ref;
     private TextInputEditText nameField;
 
 

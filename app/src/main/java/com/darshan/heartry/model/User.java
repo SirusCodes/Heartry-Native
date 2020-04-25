@@ -1,4 +1,4 @@
-package com.darshan.writepoems.model;
+package com.darshan.heartry.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 

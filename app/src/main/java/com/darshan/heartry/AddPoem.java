@@ -1,4 +1,4 @@
-package com.darshan.writepoems;
+package com.darshan.heartry;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.darshan.writepoems.model.PoemModel;
-import com.darshan.writepoems.model.User;
+import com.darshan.heartry.model.PoemModel;
+import com.darshan.heartry.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,12 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AddPoem extends AppCompatActivity {
 
-    private EditText title, poem;
-    private String userID, key = null, name;
     boolean update;
-
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference ref = db.getReference("users");
+    private EditText title, poem;
+    private String userID, key = null, name;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

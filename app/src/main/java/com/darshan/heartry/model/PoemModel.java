@@ -1,4 +1,4 @@
-package com.darshan.writepoems.model;
+package com.darshan.heartry.model;
 
 public class PoemModel {
     private String title;
@@ -12,19 +12,19 @@ public class PoemModel {
         this.poem = poem;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPoem(String poem) {
-        this.poem = poem;
-    }
-
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getPoem() {
         return poem;
+    }
+
+    public void setPoem(String poem) {
+        this.poem = poem;
     }
 }

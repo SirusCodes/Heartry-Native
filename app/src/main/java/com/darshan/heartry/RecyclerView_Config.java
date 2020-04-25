@@ -1,4 +1,4 @@
-package com.darshan.writepoems;
+package com.darshan.heartry;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.darshan.writepoems.model.PoemModel;
+import com.darshan.heartry.model.PoemModel;
 
 import java.util.List;
 
@@ -30,11 +30,9 @@ public class RecyclerView_Config {
     }
 
     class PoemItemView extends RecyclerView.ViewHolder implements View.OnClickListener {
+        OnPoemListener onPoemListener;
         private TextView title;
         private TextView poem;
-
-        OnPoemListener onPoemListener;
-
         private String key;
 
         public PoemItemView(ViewGroup parent, OnPoemListener onPoemListener) {

@@ -1,8 +1,8 @@
-package com.darshan.writepoems.database;
+package com.darshan.heartry.database;
 
 import androidx.annotation.NonNull;
 
-import com.darshan.writepoems.model.PoemModel;
+import com.darshan.heartry.model.PoemModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

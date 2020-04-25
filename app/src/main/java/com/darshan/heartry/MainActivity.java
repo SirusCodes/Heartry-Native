@@ -1,4 +1,4 @@
-package com.darshan.writepoems;
+package com.darshan.heartry;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.darshan.writepoems.database.DatabaseHelper;
-import com.darshan.writepoems.model.PoemModel;
+import com.darshan.heartry.database.DatabaseHelper;
+import com.darshan.heartry.model.PoemModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
