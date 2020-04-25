@@ -37,21 +37,24 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseReference ref;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
-    private FirebaseAuth.AuthStateListener authStateListener;
+    //    private FirebaseAuth.AuthStateListener authStateListener;
     private TextInputEditText nameField;
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        mAuth.addAuthStateListener(authStateListener);
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        mAuth.addAuthStateListener(authStateListener);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if (getSupportActionBar() != null)
+            getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance();
         db.setPersistenceEnabled(true);
@@ -70,17 +73,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() != null) {
-                    String userID = firebaseAuth.getUid();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("UserID", userID);
-                    startActivity(intent);
-                }
-            }
-        };
+//        authStateListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                if (firebaseAuth.getCurrentUser() != null) {
+//                    String userID = firebaseAuth.getUid();
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    intent.putExtra("UserID", userID);
+//                    startActivity(intent);
+//                }
+//            }
+//        };
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -133,6 +136,9 @@ public class LoginActivity extends AppCompatActivity {
                                     String name = nameField.getText().toString();
                                     Toast.makeText(LoginActivity.this, "Logged in as " + name, Toast.LENGTH_SHORT).show();
                                     writeNewUser(user.getUid(), name, user.getEmail());
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("UserID", user.getUid());
+                                    startActivity(intent);
                                 }
                             }
                         } else {
