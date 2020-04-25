@@ -10,12 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:noHistory="true" />
         <activity android:name=".MainActivity" />
         <activity android:name=".AddPoem" />
         <activity android:name=".About" />
         <activity
             android:name=".AuthCheck"
+            android:noHistory="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
