@@ -7,9 +7,9 @@
  
 ## Example Pictures
 <div>
-<img src='Example/login.png' width='350'>
-<img src='Example/poem_list.png' width='350'>
-<img src='Example/edit_poem.png' width='350'>
+<img src='Example/login.png' width='200'>
+<img src='Example/poem_list.png' width='200'>
+<img src='Example/edit_poem.png' width='200'>
 </div>
 
 ## Contributions
