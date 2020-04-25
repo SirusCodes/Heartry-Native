@@ -6,9 +6,9 @@
  - Share modifier (it will automatically add *title\* and append your name at the end)
  
 ## Example Pictures
-![Login Page](https://github.com/SirusCodes/Heartry/blob/master/Example/login.png =200x)
-![Poem List](https://github.com/SirusCodes/Heartry/blob/master/Example/poem_list.png =200x)
-![Write Poem](https://github.com/SirusCodes/Heartry/blob/master/Example/edit_poem.png =200x)
+<img src='Example/login.png' width='350'>
+<img src='Example/poem_list.png' width='350'>
+<img src='Example/edit_poem.png' width='350'>
 
 ## Contributions
 Contributions are always welcome kindly check [CONTRIBUTIONS.md](https://github.com/SirusCodes/Heartry/blob/master/CONTRIBUTIONS.md)
