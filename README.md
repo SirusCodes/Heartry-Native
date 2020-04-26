@@ -1,6 +1,9 @@
 # Heartry
 ### ***Poems are written from heart.***  
 ![](https://img.shields.io/github/license/SirusCodes/Heartry)
+
+This app is build to facilitate poets to save their poems and synchronize them so their beautiful creations live longer and at their finger tips.
+
 ## Features 
  - Online sync 
  - Share modifier (it will automatically add *title\* and append your name at the end)
@@ -13,7 +16,10 @@
 </div>
 
 ## Contributions
-Contributions are always welcome kindly check [CONTRIBUTIONS.md](https://github.com/SirusCodes/Heartry/blob/master/CONTRIBUTIONS.md)
+Contributions are always welcome kindly check [CONTRIBUTING.md](https://github.com/SirusCodes/Heartry/blob/master/CONTRIBUTING.md)
+
+## Download
+apk - [https://github.com/SirusCodes/Heartry/releases](https://github.com/SirusCodes/Heartry/releases)
 
 ## Developer
 Darshan Rander - [LinkedIn](https://www.linkedin.com/in/darshan-rander-b28a3b193/)
