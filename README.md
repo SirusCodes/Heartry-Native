@@ -19,7 +19,9 @@ This app is build to facilitate poets to save their poems and synchronize them s
 Contributions are always welcome kindly check [CONTRIBUTING.md](https://github.com/SirusCodes/Heartry/blob/master/CONTRIBUTING.md)
 
 ## Download
-apk - [https://github.com/SirusCodes/Heartry/releases](https://github.com/SirusCodes/Heartry/releases)
+<a href='https://github.com/SirusCodes/Heartry/releases'>
+<img alt='Download from release' src='https://www.inspirefm.org/wp-content/uploads/button-apk.png' width=200>
+</a>
 
 ## Developer
 Darshan Rander - [LinkedIn](https://www.linkedin.com/in/darshan-rander-b28a3b193/)
