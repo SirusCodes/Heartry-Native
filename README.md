@@ -2,7 +2,7 @@
 ### ***Poems are written from heart.***  
 ![](https://img.shields.io/github/license/SirusCodes/Heartry)
 
-This app is build to facilitate poets to save their poems and synchronize them so their beautiful creations live longer and at their finger tips.
+This app is built to facilitate poets to save their poems and synchronize them so that their beautiful creations live longer and stay at their finger tips.
 
 ## Features 
  - Online sync 
